@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: "SpringBoot H2 JWT Sample Project"
+  datasource:
+    driverClassName: "org.h2.Driver"
+    url: "jdbc:h2:mem:sbh2jwt"
+    username: "sbh2jwt"
+    password: ""
+  jpa:
+    databasePlatform: "org.hibernate.dialect.H2Dialect"
+    showSql: true
+    hibernate:
+      ddlAuto: "none"
+    generateDdl: true
+    deferDatasourceInitialization: true
+  h2:
+    console:
+      enabled: true
+      path: "/h2-console"
+  sql:
+    init:
+      continueOnError: false
+      encoding: "UTF-8"
+      mode: "always"
+      platform: "h2"
+      username: "sbh2jwt"
+      password: ""
+      dataLocations: "classpath:/h2/data-*.sql"
+      schemaLocations: "classpath:/h2/schema-*.sql"
+  security:
+    user:
+      name: sbh2jwt
+      # Same as name
+      password: "{bcrypt}$2a$10$Q.fQkwM9AGAAKA/ysvjqk.R3MzsvuTAoqf13ZWnC9iMYQrxljvH2O"
