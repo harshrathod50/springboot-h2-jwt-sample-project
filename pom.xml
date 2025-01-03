@@ -36,19 +36,6 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<!-- END: Compile-time deps -->
-		<!-- START: Runtime-time deps -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<!-- END: Runtime-time deps -->
 		<!-- START: Test-ing deps -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -193,5 +180,79 @@
 		<tag>HEAD</tag>
 		<url>https://github.com/harshrathod50/springboot-h2-jwt-sample-project.git</url>
 	</scm>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- START: Spring Boot -->
+				<spring.profiles.active>dev</spring.profiles.active>
+				<!-- END: Spring Boot -->
+			</properties>
+			<dependencies>
+				<!-- START: Runtime-time deps -->
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-devtools</artifactId>
+					<scope>runtime</scope>
+					<optional>true</optional>
+				</dependency>
+				<dependency>
+					<groupId>com.h2database</groupId>
+					<artifactId>h2</artifactId>
+					<scope>runtime</scope>
+				</dependency>
+				<!-- END: Runtime-time deps -->
+			</dependencies>
+		</profile>
+		<profile>
+			<id>test</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<!-- START: Spring Boot -->
+				<spring.profiles.active>test</spring.profiles.active>
+				<!-- END: Spring Boot -->
+			</properties>
+			<dependencies>
+				<!-- START: Runtime-time deps -->
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-devtools</artifactId>
+					<scope>runtime</scope>
+					<optional>true</optional>
+				</dependency>
+				<dependency>
+					<groupId>com.h2database</groupId>
+					<artifactId>h2</artifactId>
+					<scope>runtime</scope>
+				</dependency>
+				<!-- END: Runtime-time deps -->
+			</dependencies>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<!-- START: Spring Boot -->
+				<spring.profiles.active>prod</spring.profiles.active>
+				<!-- END: Spring Boot -->
+			</properties>
+			<dependencies>
+				<!-- START: Runtime-time deps -->
+				<dependency>
+					<groupId>com.mysql</groupId>
+					<artifactId>mysql-connector-j</artifactId>
+					<scope>runtime</scope>
+				</dependency>
+				<!-- END: Runtime-time deps -->
+			</dependencies>
+		</profile>
+	</profiles>
 	<!-- END: Environment Settings -->
 </project>
