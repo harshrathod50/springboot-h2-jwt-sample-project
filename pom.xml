@@ -3,34 +3,18 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.1</version>
-		<relativePath /> <!-- lookup parent from repository -->
-	</parent>
+	<!-- START: The Basics -->
 	<groupId>dev.rathod.harsh</groupId>
 	<artifactId>springboot-h2-jwt-sample-project</artifactId>
 	<version>1.0.0</version>
-	<name>SpringBoot H2 JWT Sample Project</name>
-	<description>A sample project showing how to implement JWT using Spring Security 6 and Spring Boot 3.</description>
-	<url />
-	<licenses>
-		<license />
-	</licenses>
-	<developers>
-		<developer />
-	</developers>
-	<scm>
-		<connection />
-		<developerConnection />
-		<tag />
-		<url />
-	</scm>
-	<properties>
-		<java.version>17</java.version>
-	</properties>
+	<packaging>jar</packaging>
 	<dependencies>
+		<!-- START: Compile-time deps -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -51,7 +35,8 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		<!-- END: Compile-time deps -->
+		<!-- START: Runtime-time deps -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -63,11 +48,8 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
+		<!-- END: Runtime-time deps -->
+		<!-- START: Test-ing deps -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -78,10 +60,68 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- END: Test-ing deps -->
 	</dependencies>
-
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.4.1</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<properties>
+		<java.version>17</java.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+	</properties>
+	<!-- END: The Basics -->
+	<!-- START: Build Settings -->
 	<build>
+		<defaultGoal>install</defaultGoal>
+		<directory>${project.basedir}/target</directory>
+		<finalName>${project.artifactId}-${project.version}</finalName>
+		<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+		<outputDirectory>${project.basedir}/target/classes</outputDirectory>
+		<scriptSourceDirectory>${project.basedir}/src/main/scripts</scriptSourceDirectory>
+		<testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
+		<testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
+		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>${project.basedir}/src/test/resources</directory>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
 		<plugins>
+			<plugin>
+				<inherited>true</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>3.5.0</version>
+				<executions>
+					<execution>
+						<id>enforce-versions</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireMavenVersion>
+									<version>3.9.9</version>
+								</requireMavenVersion>
+								<requireJavaVersion>
+									<version>17</version>
+								</requireJavaVersion>
+							</rules>
+							<fail>true</fail>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -108,5 +148,50 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	<!-- END: Build Settings -->
+	<!-- START: More Project Information -->
+	<name>SpringBoot H2 JWT Sample Project</name>
+	<description>A sample project showing how to implement JWT using Spring Security 6 and Spring Boot 3.</description>
+	<url>https://github.com/harshrathod50/springboot-h2-jwt-sample-project.git</url>
+	<inceptionYear>2025</inceptionYear>
+	<licenses>
+		<license>
+			<name>UNLICENSED</name>
+		</license>
+	</licenses>
+	<organization>
+		<name>Harsh Rathod</name>
+		<url>https://harsh.rathod.dev</url>
+	</organization>
+	<developers>
+		<developer>
+			<id>harshrathod50</id>
+			<name>Harsh Rathod</name>
+			<email>hrathore216@gmail.com</email>
+			<url>https://harsh.rathod.dev</url>
+			<organization>Harsh Rathod</organization>
+			<organizationUrl>https://harsh.rathod.dev</organizationUrl>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>Asia/Kolkata</timezone>
+			<properties>
+				<picUrl>https://avatars.githubusercontent.com/u/8848319?v=4</picUrl>
+			</properties>
+		</developer>
+	</developers>
+	<!-- END: More Project Information -->
+	<!-- START: Environment Settings -->
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/harshrathod50/springboot-h2-jwt-sample-project/issues</url>
+	</issueManagement>
+	<scm>
+		<connection>scm:git:https://github.com/harshrathod50/springboot-h2-jwt-sample-project.git</connection>
+		<developerConnection>scm:git:https://github.com/harshrathod50/springboot-h2-jwt-sample-project.git</developerConnection>
+		<tag>HEAD</tag>
+		<url>https://github.com/harshrathod50/springboot-h2-jwt-sample-project.git</url>
+	</scm>
+	<!-- END: Environment Settings -->
 </project>
