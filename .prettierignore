@@ -1,0 +1,6 @@
+# SCM
+**/.git
+
+# Spring Boot + Maven
+**/.mvn
+**/target

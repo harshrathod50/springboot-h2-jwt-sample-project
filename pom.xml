@@ -133,6 +133,27 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<!-- START: Prettier JAVA: https://github.com/HubSpot/prettier-maven-plugin -->
+			<plugin>
+				<groupId>com.hubspot.maven.plugins</groupId>
+				<artifactId>prettier-maven-plugin</artifactId>
+				<version>0.22</version>
+				<configuration>
+					<inputGlobs>
+						<inputGlob>src/{main,test}/java/**/*.java</inputGlob>
+					</inputGlobs>
+				</configuration>
+				<executions>
+					<execution>
+						<?m2e execute onConfiguration,onIncremental?>
+						<phase>validate</phase>
+						<goals>
+							<goal>${plugin.prettier.goal}</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- END: Prettier JAVA -->
 		</plugins>
 	</build>
 	<!-- END: Build Settings -->
@@ -190,6 +211,9 @@
 				<!-- START: Spring Boot -->
 				<spring.profiles.active>dev</spring.profiles.active>
 				<!-- END: Spring Boot -->
+				<!-- START: Prettier JAVA: Fix and re-write code. -->
+				<plugin.prettier.goal>write</plugin.prettier.goal>
+				<!-- END: Prettier JAVA -->
 			</properties>
 			<dependencies>
 				<!-- START: Runtime-time deps -->
@@ -242,6 +266,9 @@
 				<!-- START: Spring Boot -->
 				<spring.profiles.active>prod</spring.profiles.active>
 				<!-- END: Spring Boot -->
+				<!-- START: Prettier JAVA: Validate if code is formatted or not. -->
+				<plugin.prettier.goal>check</plugin.prettier.goal>
+				<!-- END: Prettier JAVA -->
 			</properties>
 			<dependencies>
 				<!-- START: Runtime-time deps -->
