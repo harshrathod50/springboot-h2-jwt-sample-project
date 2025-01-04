@@ -1,5 +1,6 @@
 package dev.rathod.harsh.springboot_h2_jwt_sample_project.configuration;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -38,5 +39,10 @@ public class SpringBootH2JwtSampleProjectConfiguration {
 			.formLogin(Customizer.withDefaults()) // To use default login form
 			.rememberMe(Customizer.withDefaults());
 		return http.build();
+	}
+
+	@Bean
+	ModelMapper getModelMapper() {
+		return new ModelMapper();
 	}
 }
