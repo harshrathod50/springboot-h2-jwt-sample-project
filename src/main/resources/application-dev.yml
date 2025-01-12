@@ -12,7 +12,7 @@ spring:
     showSql: true
     hibernate:
       ddlAuto: "none"
-    generateDdl: true
+    generateDdl: false
     deferDatasourceInitialization: true
   h2:
     console:
